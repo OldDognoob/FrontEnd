@@ -1,19 +1,16 @@
-import React, {useState, UseEffect} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
-import Recipe from "./Recipe";
 import AddRecipe from "./AddRecipe";
 
 
-export default function RecipeList(props) {
-    const[recipe, setRecipe] = useState("");
-    const[addrecipe,setAddRecipe] = useState("");
+export default function RecipeList() {
+    const[addRecipe,setAddRecipe] = useState([]);
     
   
     useEffect(() => {
       axios
-       .post('')
+       .post('./AddRecipe')
        .then(response =>{
-        setRecipe(response.data.results)
         setAddRecipe(response.data.results)
        
     
@@ -22,12 +19,12 @@ export default function RecipeList(props) {
          console.log(error);
        });
     
-    }, [recipe]);
+    }, []);
   
  
   
      function changeHandler(event) {
-       setRecipe(event.target.value)
+       setAddRecipe(event.target.value)
        
      }
   
@@ -35,9 +32,9 @@ export default function RecipeList(props) {
   
     return (
       <section className="recipe-list">
-        <Recipe changeHandler={changeHandler}/>
-       <h2>{addrecipe.map(recipe => {
-            return <recipe key={recipe.id} data={recipe}   />
+        <addRecipe changeHandler={changeHandler}/>
+       <h2>{addRecipe.map(addRecipe => {
+            return <AddRecipe key={addRecipe.id} data={addRecipe}   />
        })}</h2>
       </section>
     );

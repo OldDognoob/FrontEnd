@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import RegisterForm from "./RegisterForm";
 
 function LoginForm() {
   const [user, setUser] = useState({ username: "", password: "" });
